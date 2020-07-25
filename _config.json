@@ -1,0 +1,14 @@
+{
+    "BoardID": "",
+    "AppKey": "",
+    "Token": "",
+    "Members": [
+        ""
+    ],
+    "Delays": {
+        "To Do": 2.5,
+        "Week": 7.0,
+        "Month": 31.0,
+        "Year": 365.0
+    }
+}
