@@ -19,22 +19,20 @@ func run() error {
 
 	if err == nil {
 		client := trello.NewClient(config.AppKey, config.Token)
-
 		board, err := client.GetBoard(config.BoardID, trello.Defaults())
 		if err == nil {
 			c := make(chan error)
 			defer close(c)
 
-			go processLists(board, listcommands.AllCommands(), c)
-			err = <-c
-			if err != nil {
-				return nil
+			go processCards(board, cardcommands.AllCommands(config.Members, config.Delays), c)
+			if err = <-c; err != nil {
+				return err
 			}
 
-			go processCards(board, cardcommands.AllCommands(config.Members, config.Delays), c)
-			err = <-c
-			if err != nil {
-				return nil
+			board, err = client.GetBoard(config.BoardID, trello.Defaults())
+			go processLists(board, listcommands.AllCommands(), c)
+			if err = <-c; err != nil {
+				return err
 			}
 		}
 	}
@@ -47,20 +45,27 @@ func run() error {
 }
 
 func processCards(board *trello.Board, commands []cardcommands.CardCommand, c chan error) {
-	cards, err := board.GetCards(trello.Defaults())
+	allCards := []*trello.Card{}
 
-	if err != nil {
-		handleError(err)
+	lists, err := board.GetLists(trello.Defaults())
+	if err == nil {
+		for _, list := range lists {
+			cards, err := list.GetCards(trello.Defaults())
+			if err == nil {
+				for _, card := range cards {
+					card.Board = board
+					card.List = list
+					allCards = append(allCards, card)
+				}
+			}
+		}
 	}
 
-	numResults := len(commands) * len(cards)
-
+	numResults := len(allCards) * len(commands)
 	c2 := make(chan error, numResults)
 	defer close(c2)
-
-	for _, command := range commands {
-		for _, card := range cards {
-			card.Board = board
+	for _, card := range allCards {
+		for _, command := range commands {
 			go cardcommands.ProcessCard(card, command, c2)
 		}
 	}
@@ -86,7 +91,7 @@ func processLists(board *trello.Board, commands []listcommands.ListCommand, c ch
 
 	for _, command := range commands {
 		for _, list := range lists {
-			go listcommands.ProcessList(list, command, c)
+			go listcommands.ProcessList(list, command, c2)
 		}
 	}
 

@@ -46,8 +46,10 @@ func (m MoveDueCommand) UpdateCard(card *trello.Card) error {
 			match := invertedDelays[maxDue]
 
 			for _, list := range lists {
-				if list.ID != card.IDList &&
-					strings.Contains(strings.ToLower(list.Name), strings.ToLower(match)) {
+				if strings.Contains(strings.ToLower(list.Name), strings.ToLower(match)) {
+					if list.ID == card.IDList {
+						return nil
+					}
 					return card.MoveToList(list.ID, trello.Defaults())
 				}
 			}
