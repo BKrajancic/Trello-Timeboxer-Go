@@ -19,7 +19,7 @@ func ProcessCard(card *trello.Card, command CardCommand, c chan error) {
 
 func AllCommands(members []string, delays map[string]float64) []CardCommand {
 	return []CardCommand{
-		MissingDueCommand{},
+		MissingDueCommand{Delays: delays},
 		MissingMemberCommand{Members: members},
 		OverdueCommand{Delays: delays},
 		MoveDueCommand{Delays: delays},
