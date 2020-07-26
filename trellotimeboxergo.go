@@ -9,11 +9,6 @@ import (
 	"github.com/adlio/trello"
 )
 
-func main() {
-	trellotimeboxergo()
-	trellotimeboxergogo.trellotimeboxergo.trellotimeboxergo()
-}
-
 func Run() error {
 	config, err := config.GetConfig()
 
