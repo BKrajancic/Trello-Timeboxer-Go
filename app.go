@@ -1,4 +1,4 @@
-package trellotimeboxergo
+package main
 
 import (
 	"fmt"
@@ -9,7 +9,11 @@ import (
 	"github.com/adlio/trello"
 )
 
-func Run() error {
+func main() {
+	run()
+}
+
+func run() error {
 	config, err := config.GetConfig()
 
 	if err == nil {
