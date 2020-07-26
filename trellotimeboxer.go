@@ -1,20 +1,20 @@
-package trellotimeboxer
+package trellotimeboxergo
 
 import (
 	"fmt"
-	"trellotimeboxer/cardcommands"
-	"trellotimeboxer/config"
-	"trellotimeboxer/listcommands"
+	"trellotimeboxergo/cardcommands"
+	"trellotimeboxergo/config"
+	"trellotimeboxergo/listcommands"
 
 	"github.com/adlio/trello"
 )
 
 func main() {
-	trellotimeboxer()
-	trellotimeboxergo.trellotimeboxer.trellotimeboxer()
+	trellotimeboxergo()
+	trellotimeboxergogo.trellotimeboxergo.trellotimeboxergo()
 }
 
-func trellotimeboxer() error {
+func Run() error {
 	config, err := config.GetConfig()
 
 	if err == nil {
