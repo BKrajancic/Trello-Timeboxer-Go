@@ -11,6 +11,7 @@ import (
 
 func main() {
 	trellotimeboxer()
+	trellotimeboxergo.trellotimeboxer.trellotimeboxer()
 }
 
 func trellotimeboxer() error {

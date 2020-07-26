@@ -1,7 +1,9 @@
 package main
 
-import "trellotimeboxer"
+import (
+	"github.com/BKrajancic/trellotimeboxergo"
+)
 
 func main() {
-	trellotimeboxer.trellotimeboxer()
+	trellotimeboxergo.trellotimeboxer()
 }
