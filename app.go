@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/BKrajancic/trellotimeboxergo/cardcommands"
-	"github.com/BKrajancic/trellotimeboxergo/config"
-	"github.com/BKrajancic/trellotimeboxergo/listcommands"
+	"trellotimeboxergo/cardcommands"
+	"trellotimeboxergo/config"
+	"trellotimeboxergo/listcommands"
 
 	"github.com/adlio/trello"
 )
