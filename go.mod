@@ -1,4 +1,4 @@
-module trellotimeboxergo
+module github.com/BKrajancic/trellotimeboxergo
 
 go 1.14
 

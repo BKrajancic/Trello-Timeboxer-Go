@@ -21,7 +21,7 @@ func (m MissingDueCommand) UpdateCard(card *trello.Card) error {
 
 		if strings.Contains(strings.ToLower(card.Name), strings.ToLower(match)) {
 			due := time.Now().Add(extraHours)
-			return card.Update(trello.Arguments{"due": due.String()})
+			return card.Update(trello.Arguments{"due": due.Format(time.RFC3339)})
 		}
 	}
 
