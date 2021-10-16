@@ -32,13 +32,9 @@ func (m MissingMemberCommand) UpdateCard(card *trello.Card) error {
 	for _, newMember := range m.Members {
 		found := false
 
-		existingMembers, err := card.GetMembers(trello.Defaults())
-		if err != nil {
-			errOut = err
-		}
-
+		existingMembers := card.IDMembers
 		for _, existingMember := range existingMembers {
-			found = newMember == existingMember.ID
+			found = newMember == existingMember
 			if found {
 				break
 			}
