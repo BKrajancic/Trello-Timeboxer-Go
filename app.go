@@ -38,11 +38,6 @@ func run() error {
 		return err
 	}
 
-	board, err = client.GetBoard(config.BoardID, trello.Defaults())
-	if err != nil {
-		return err
-	}
-
 	go processLists(board, listcommands.AllCommands(), c)
 
 	if err = <-c; err != nil {
@@ -112,8 +107,4 @@ func processLists(board *trello.Board, commands []listcommands.ListCommand, c ch
 		out = <-c2
 	}
 	c <- out
-}
-
-func handleError(err error) {
-	fmt.Println(err.Error())
 }

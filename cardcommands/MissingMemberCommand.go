@@ -9,19 +9,17 @@ type MissingMemberCommand struct {
 func (m MissingMemberCommand) CheckCard(card *trello.Card) bool {
 	for _, newMember := range m.Members {
 		found := false
-		existingMembers, err := card.GetMembers(trello.Defaults())
+		existingMembers := card.IDMembers
 
-		if err == nil {
-			for _, existingMember := range existingMembers {
-				found = newMember == existingMember.ID
-				if found {
-					break
-				}
+		for _, existingMember := range existingMembers {
+			found = newMember == existingMember
+			if found {
+				break
 			}
+		}
 
-			if !found {
-				return true
-			}
+		if !found {
+			return true
 		}
 	}
 
