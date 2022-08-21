@@ -11,4 +11,4 @@ in `src`).
 In command prompt, go to this project directory and run:
 `docker build .` At the end there should be `Successfully built <image id>`.
 
-Then run `docker run <image id>`
+Then run `docker run -d <image id>`
