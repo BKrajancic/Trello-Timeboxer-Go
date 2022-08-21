@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	for range time.Tick(time.Second * 5) {
+	for range time.Tick(time.Minute * 5) {
 		err := run()
 		if err != nil {
 			fmt.Printf(err.Error())
