@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/BKrajancic/trellotimeboxergo/cardcommands"
 	"github.com/BKrajancic/trellotimeboxergo/config"
@@ -11,9 +12,12 @@ import (
 )
 
 func main() {
-	err := run()
-	if err != nil {
-		fmt.Printf(err.Error())
+	for range time.Tick(time.Second * 5) {
+		err := run()
+		if err != nil {
+			fmt.Printf(err.Error())
+			break
+		}
 	}
 }
 
